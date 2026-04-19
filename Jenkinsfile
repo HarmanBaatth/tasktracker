@@ -4,28 +4,28 @@ pipeline {
     stages {
         stage('Install') {
             steps {
-                sh 'npm install'
+                bat 'npm install'
             }
         }
         stage('Lint') {
             steps {
-                sh 'npx eslint .'
+                bat 'npx eslint .'
             }
         }
         stage('Test') {
             steps {
-                sh 'npm test'
+                bat 'npm test'
             }
         }
         stage('Build Docker') {
             steps {
-                sh 'docker build -t tasktracker .'
+                bat 'docker build -t tasktracker .'
             }
         }
         stage('Deploy') {
             steps {
-                sh 'docker rm -f tasktracker || true'
-                sh 'docker run -d -p 3000:3000 --name tasktracker tasktracker'
+                bat 'docker rm -f tasktracker || exit 0'
+                bat 'docker run -d -p 3000:3000 --name tasktracker tasktracker'
             }
         }
     }

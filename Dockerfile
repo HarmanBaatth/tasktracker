@@ -1,19 +1,19 @@
-# Use official Node.js image
+# Use official Node.js 20 image
 FROM node:20
 
-# Set working directory
+# Set working directory inside container
 WORKDIR /usr/src/app
 
-# Copy package files first
+# Copy package.json and package-lock.json first
 COPY package*.json ./
 
 # Install dependencies
 RUN npm install
 
-# Copy all source code
+# Copy the rest of the project files
 COPY . .
 
-# Expose port 3000
+# Expose port 3000 for the app
 EXPOSE 3000
 
 # Start the app
